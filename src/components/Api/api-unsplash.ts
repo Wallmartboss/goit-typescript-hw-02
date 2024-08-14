@@ -9,6 +9,6 @@ export const requestPictures = async (query: string, page = 0) => {
       per_page: 8,
       },
   });
-  console.log(response.data)
+  // console.log(response.data)
   return response.data;
 };

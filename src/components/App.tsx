@@ -6,15 +6,7 @@ import ImageGallery from './ImageGallery/ImageGallery';
 import ErrorMessage from './ErrorMessage/ErrorMessage';
 import LoadMoreBtn from './LoadMoreBtn/LoadMoreBtn';
 import ImageModal from './ImageModal/ImageModal';
-
-interface ImageItem {
-  id: string;
-  alt_description: string;
-  urls: {
-    small: string;
-    large: string;
-  };
-}
+import { ImageItem } from './types';
 
 const App: React.FC = () => {
   const [query, setQuery] = useState<string>('');

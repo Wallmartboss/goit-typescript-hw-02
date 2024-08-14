@@ -1,6 +1,14 @@
 import s from './ImageCard.module.css';
+import { ImageItem } from '../types';
 
-const ImageCard = ({ item, openModal }) => {
+
+// Визначення типа для пропсів компонента ImageCard
+interface ImageCardProps {
+  item: ImageItem;
+  openModal: (largeImage: string, alt: string) => void;
+}
+
+const ImageCard: React.FC<ImageCardProps> = ({ item, openModal }) => {
   const {
     alt_description,
     urls: { small, regular },

@@ -1,7 +1,14 @@
 import ImageCard from '../ImageCard/ImageCard';
 import s from './ImageGallery.module.css';
+import { ImageItem } from '../types';
 
-const ImageGallery = ({ items, openModal }) => {
+// Визначення типа для пропсів компонента ImageGallery
+interface ImageGalleryProps {
+  items: ImageItem[];
+  openModal: (largeImage: string, alt: string) => void;
+}
+
+const ImageGallery: React.FC<ImageGalleryProps> = ({ items, openModal }) => {
   if (!items || items.length === 0) {
     return <h3> No items to display </h3>; // перевірка на пустий масив
   }
