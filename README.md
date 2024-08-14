@@ -1,0 +1,1 @@
+My second homework on TypeScript
