@@ -7,6 +7,9 @@ import ErrorMessage from './ErrorMessage/ErrorMessage';
 import LoadMoreBtn from './LoadMoreBtn/LoadMoreBtn';
 import ImageModal from './ImageModal/ImageModal';
 import { ImageItem } from './types';
+import ReactModal from 'react-modal';
+
+ReactModal.setAppElement('#root');
 
 const App: React.FC = () => {
   const [query, setQuery] = useState<string>('');
@@ -19,10 +22,16 @@ const App: React.FC = () => {
   const [largeImage, setLargeImage] = useState<string>(' ');
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
 
+  useEffect(() => {
+    console.log('Modal open state (isOpen):', modalIsOpen);
+  }, [modalIsOpen]);
+
   const openModal = (largeImage: string, alt: string): void => {
-    setLargeImage(largeImage);
-    setAlt(alt);
-    setModalIsOpen(true);
+    if (!modalIsOpen) {
+      setLargeImage(largeImage);
+      setAlt(alt);
+      setModalIsOpen(true);
+    }
   };
 
   const closeModal = (): void => {
@@ -66,12 +75,19 @@ const App: React.FC = () => {
         <ImageGallery items={items} openModal={openModal} />
       )}
       {totalPages > page && !isLoading && <LoadMoreBtn setPage={setPage} />}
-      {largeImage && (
+      {modalIsOpen && largeImage && (
         <ImageModal
+          key={largeImage}
           largeImage={largeImage}
           alt={alt}
           isOpen={modalIsOpen}
           onRequestClose={closeModal}
+          onAfterOpen={() =>
+            console.log('Modal has been registered and opened')
+          }
+          onAfterClose={() =>
+            console.log('Modal has been unregistered and closed')
+          }
         />
       )}
     </div>

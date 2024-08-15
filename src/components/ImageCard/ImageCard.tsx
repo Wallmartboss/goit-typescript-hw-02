@@ -1,7 +1,6 @@
 import s from './ImageCard.module.css';
 import { ImageItem } from '../types';
 
-
 // Визначення типа для пропсів компонента ImageCard
 interface ImageCardProps {
   item: ImageItem;
@@ -19,7 +18,16 @@ const ImageCard: React.FC<ImageCardProps> = ({ item, openModal }) => {
       src={small}
       alt={alt_description}
       className={s.card}
-      onClick={() => openModal(regular, alt_description)}
+      onClick={() => {
+        console.log(
+          // для перевірки отриманих параметрів
+          'Opening modal with image:',
+          regular,
+          'alt:',
+          alt_description
+        );
+        openModal(regular, alt_description);
+      }}
     />
   );
 };
