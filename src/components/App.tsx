@@ -22,10 +22,6 @@ const App: React.FC = () => {
   const [largeImage, setLargeImage] = useState<string>(' ');
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
 
-  useEffect(() => {
-    console.log('Modal open state (isOpen):', modalIsOpen);
-  }, [modalIsOpen]);
-
   const openModal = (largeImage: string, alt: string): void => {
     if (!modalIsOpen) {
       setLargeImage(largeImage);
@@ -45,6 +41,10 @@ const App: React.FC = () => {
     setPage(1);
     setItems([]);
   };
+
+  useEffect(() => {
+    console.log('Modal open state (isOpen):', modalIsOpen);
+  }, [modalIsOpen]);
 
   useEffect(() => {
     const getData = async () => {
@@ -75,7 +75,7 @@ const App: React.FC = () => {
         <ImageGallery items={items} openModal={openModal} />
       )}
       {totalPages > page && !isLoading && <LoadMoreBtn setPage={setPage} />}
-      {modalIsOpen && largeImage && (
+      {largeImage && (
         <ImageModal
           key={largeImage}
           largeImage={largeImage}

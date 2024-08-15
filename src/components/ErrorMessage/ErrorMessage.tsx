@@ -1,9 +1,7 @@
-import s from "./ErrorMessage.module.css";
+import s from './ErrorMessage.module.css';
 
-const ErrorMessage = () => {
-  return (
-    <p className={s.errorText}> Something went wrong! Try again... </p>
-  )
-}
+const ErrorMessage: React.FC = () => {
+  return <p className={s.errorText}> Something went wrong! Try again... </p>;
+};
 
-export default ErrorMessage
+export default ErrorMessage;
