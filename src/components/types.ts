@@ -8,3 +8,8 @@ export interface ImageItem {
     large: string;
   };
 }
+
+export interface ApiResponse {
+  results: ImageItem[];
+  total_pages: number;
+}

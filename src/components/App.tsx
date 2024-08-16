@@ -6,7 +6,7 @@ import ImageGallery from './ImageGallery/ImageGallery';
 import ErrorMessage from './ErrorMessage/ErrorMessage';
 import LoadMoreBtn from './LoadMoreBtn/LoadMoreBtn';
 import ImageModal from './ImageModal/ImageModal';
-import { ImageItem } from './types';
+import { ImageItem, ApiResponse } from './types';
 import ReactModal from 'react-modal';
 
 ReactModal.setAppElement('#root');
@@ -18,8 +18,8 @@ const App: React.FC = () => {
   const [page, setPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(0);
   const [isError, setIsError] = useState<boolean>(false);
-  const [alt, setAlt] = useState<string>(' ');
-  const [largeImage, setLargeImage] = useState<string>(' ');
+  const [alt, setAlt] = useState<string>('');
+  const [largeImage, setLargeImage] = useState<string>('');
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
 
   const openModal = (largeImage: string, alt: string): void => {
@@ -43,15 +43,11 @@ const App: React.FC = () => {
   };
 
   useEffect(() => {
-    console.log('Modal open state (isOpen):', modalIsOpen);
-  }, [modalIsOpen]);
-
-  useEffect(() => {
-    const getData = async () => {
+    const getData = async (): Promise<void> => {
       try {
         setIsLoading(true);
         setIsError(false);
-        const response = await requestPictures(query, page);
+        const response: ApiResponse = await requestPictures(query, page);
         setItems(prev => [...prev, ...response.results]);
         setTotalPages(response.total_pages);
       } catch (error) {
